@@ -1,0 +1,14 @@
+.heading {
+    margin-bottom: 2rem;
+}
+
+.main {
+    padding: 3rem 1rem;
+}
+
+
+@media screen and (min-width: 768px) {
+    .main {
+        padding: 5rem 2rem;
+    }
+}
