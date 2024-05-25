@@ -51,6 +51,7 @@
 .drop-down {
     position: absolute;
 
+    z-index: 10;
     top: 104%;
     left: 0;
     max-width: 400px;
@@ -76,6 +77,11 @@
         border-bottom: 1px solid #e1e1e1;
 
         font-size: 0.9rem;
+
+        &:hover {
+            cursor: pointer;
+            background: #e9e9e9;
+        }
 
         .current-time {
             text-wrap: nowrap;

@@ -1,0 +1,39 @@
+.draggable-container {
+    border: 1px solid #e1e1e1;
+
+    &.fixed-height {
+        height: 300px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+
+
+.dragger-and-name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.time-zone-container {
+    padding: 1rem 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}

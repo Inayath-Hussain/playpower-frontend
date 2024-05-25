@@ -1,0 +1,27 @@
+.dragger {
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+
+
+.time-zone-container {
+    padding: 1rem 0.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}

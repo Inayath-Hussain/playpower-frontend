@@ -18,10 +18,16 @@ const getTimeZoneController = (req, res, next) => {
         response.on("data", (chunk) => result.push(chunk))
 
         response.on("end", () => {
-            const data = JSON.parse(Buffer.concat(result).toString())
-            console.log(data);
+            try {
+                const data = JSON.parse(Buffer.concat(result).toString())
+                console.log(data);
 
-            res.status(200).json(data);
+                res.status(200).json(data);
+            }
+            catch (ex) {
+                console.log(ex)
+                res.status(500).json({ message: "Internal Server error" })
+            }
         })
 
         response.on("error", (err) => {
