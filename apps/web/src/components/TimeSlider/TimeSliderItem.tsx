@@ -107,8 +107,6 @@ const TimeSliderItem = forwardRef<HTMLDivElement, Iprops>(({ data, style, listen
             console.log(newUnix, getSeconds(newUnix, data.Offset))
             return newUnix
         })
-        // setValue(value - (latestNum + value))
-
     }
 
     useEffect(() => {

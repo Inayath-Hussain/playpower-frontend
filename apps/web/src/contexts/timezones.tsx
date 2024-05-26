@@ -4,7 +4,6 @@ import { ISearchResult } from "@src/services/getTimeZone";
 
 export interface TimeZoneContextValue extends ISearchResult {
     uniqueId: number
-    // seconds: number // number of seconds passed since the day beginning, used as slider value
 }
 
 
