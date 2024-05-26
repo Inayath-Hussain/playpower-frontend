@@ -1,6 +1,9 @@
 import Header from "./components/Header"
-import "./App.scss";
 import TimeSliderContainer from "./components/TimeSlider/TimeSliderContainer";
+
+import "./App.scss";
+import "nouislider/distribute/nouislider.css";
+
 
 function App() {
 

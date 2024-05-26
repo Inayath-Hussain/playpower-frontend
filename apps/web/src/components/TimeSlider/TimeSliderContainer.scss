@@ -1,5 +1,5 @@
 .draggable-container {
-    border: 1px solid #e1e1e1;
+    border: 1px solid var(--grey);
 
     &.fixed-height {
         height: 300px;
@@ -22,6 +22,7 @@
 
 .time-zone-container {
     padding: 1rem 0.5rem;
+    padding-bottom: 3rem;
 
     display: flex;
     flex-direction: row;

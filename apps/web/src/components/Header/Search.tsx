@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import utcPlugin from "dayjs/plugin/utc"
 
@@ -8,17 +8,35 @@ import { ISearchResult, getTimeZoneService } from "@src/services/getTimeZone";
 import { ApiError } from "@src/services/errors";
 
 import "./Search.scss";
+import { unixcontext } from "@src/contexts/unix";
 
 
 
 const Search = () => {
 
-    const { setTimeZones } = useContext(timezonesContext);
+    const { timezones, setTimeZones } = useContext(timezonesContext);
+    const { setUnix } = useContext(unixcontext);
 
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResult, setSearchResult] = useState<ISearchResult[]>([]);
 
     const [openDropDown, setOpenDropDown] = useState(false);
+
+
+    const searchContainerRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const handleBlur = (e: MouseEvent) => {
+            if (e.composedPath().includes(searchContainerRef.current as Node) === false) setOpenDropDown(false);
+        }
+
+        document.addEventListener("click", handleBlur)
+
+        return () => {
+            document.removeEventListener("click", handleBlur)
+        }
+    }, [])
+
 
 
     // setTimeout id used for debouncing
@@ -46,9 +64,11 @@ const Search = () => {
     }
 
 
-    const handleTimeZoneSelect = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, value: ISearchResult) => {
+    const handleAddTimeZone = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, value: ISearchResult) => {
 
         e.preventDefault();
+
+        if (timezones.length === 0) setUnix(Date.now())
 
         const timezone = { ...value, uniqueId: Date.now() }
         setTimeZones(prev => [...prev, timezone])
@@ -65,31 +85,30 @@ const Search = () => {
     }
 
     return (
-        <>
-            <div className="timezone_search_container" onBlur={() => setOpenDropDown(false)}>
-                <input type="text" value={searchQuery} onChange={handleChange} onFocus={() => setOpenDropDown(true)} />
+        <div className="timezone_search_container" ref={searchContainerRef}>
+            <input type="text" value={searchQuery} onChange={handleChange} onFocus={() => setOpenDropDown(true)} />
 
-                <button>
-                    <img src={PlusIcon} alt="" width={20} height={20} />
-                </button>
+            <button>
+                <img src={PlusIcon} alt="" width={20} height={20} />
+            </button>
 
 
-                {
-                    openDropDown && searchResult.length > 0 ?
-                        <ul className="drop-down">
-                            {searchResult.map(s => (
-                                <li key={s.Id} onClick={(e) => handleTimeZoneSelect(e, s)}>
-                                    <p>{s.Abbreviation} ({s.Name})</p>
-                                    <p className="current-time">{getTime(s.Offset)}</p>
-                                </li>
-                            ))}
-                        </ul>
-                        :
-                        null
-                }
+            {
+                openDropDown && searchResult.length > 0 ?
+                    <ul className="drop-down">
+                        {searchResult.map(s => (
+                            <li key={s.Id} onClick={(e) => handleAddTimeZone(e, s)}>
+                                <p>{s.Abbreviation} ({s.Name})</p>
+                                <p className="current-time">{getTime(s.Offset)}</p>
+                            </li>
+                        ))}
+                    </ul>
+                    :
+                    null
+            }
 
-            </div>
-        </>
+        </div>
+
     );
 }
 

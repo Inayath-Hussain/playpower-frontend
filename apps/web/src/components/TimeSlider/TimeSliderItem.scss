@@ -1,3 +1,12 @@
+.content-and-slider {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+
 .dragger {
     cursor: grab;
 
@@ -8,6 +17,12 @@
 
 
 
+
+.slider {
+    margin-top: 0.5rem;
+}
+
+
 .time-zone-container {
     padding: 1rem 0.5rem;
 
@@ -15,13 +30,90 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    gap: 0.5rem;
 
-
+    border-bottom: 1px solid var(--grey);
+    position: relative;
 
     .content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
+
+        flex: 1;
+
+        .time-and-date {
+            width: 30%;
+            margin-right: 4rem;
+
+            .time {
+                box-shadow: 0 1px #fff, inset 0 1px 4px rgba(0, 0, 0, .15);
+
+                font-size: 1.25rem;
+                font-weight: 700;
+
+                border-radius: 3px;
+                padding: 0.4rem 0;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                width: 100%;
+            }
+
+
+
+            .offset-and-date {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                color: #666666;
+                margin-top: 0.5rem;
+            }
+        }
+
+
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            align-self: stretch;
+
+            h3 {
+                color: #666666;
+                font-size: 1.25rem;
+            }
+
+            p {
+                margin-top: 0.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+    }
+
+
+
+    .delete {
+        display: none;
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+
+        background: transparent;
+        border: 0;
+        outline: 0;
+
+        cursor: pointer;
+    }
+
+    &:hover .delete {
+        display: block;
     }
 }
